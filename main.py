@@ -19,7 +19,7 @@ TELEGRAM_TOKEN = "8489524872:AAFRy5x8W15tGhcLdMKtEsKh3EmKHXRd_DM"
 
 # === ВСТАВЬ СЮДА ВСЕ СВОИ 8 КЛЮЧЕЙ ===
 API_KEYS = [
-    "AIzaSyCVXG2C65ZANx1UGCl-NDHTFG_g_so_Nx4"  # Ключ 2
+     # Ключ 2
 ]
 
 MODEL_NAME = 'gemini-flash-latest'
