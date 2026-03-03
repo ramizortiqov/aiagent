@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from aiogram.types import FSInputFile
 import re
 # === НОВАЯ БИБЛИОТЕКА GOOGLE ===
-import google.generativeai as genai
+from google.genai import genai
 from docx.oxml import OxmlElement
 from docx import Document
 from docx.shared import Pt, RGBColor,Cm 
@@ -15,12 +15,11 @@ import PyPDF2
 from docx.oxml.ns import qn
 
 # ================= НАСТРОЙКИ =================
-TELEGRAM_TOKEN = os.getenv('BOT_TOKEN')
+TELEGRAM_TOKEN = "8489524872:AAFRy5x8W15tGhcLdMKtEsKh3EmKHXRd_DM"
 
 # === ВСТАВЬ СЮДА ВСЕ СВОИ 8 КЛЮЧЕЙ ===
 API_KEYS = [
-     os.getenv('API_KEY')
-     # Ключ 2
+    "AIzaSyB7Io_BtQtksmbn2wzIbD0ROGsYqZIATEM"  # Ключ 2
 ]
 
 MODEL_NAME = 'gemini-flash-latest'
@@ -366,19 +365,17 @@ async def extract_text_from_file(file_path, file_ext):
 
 async def process_with_gemini(questions_batch, start_number):
     global current_key_index
-
     prompt_text = f"{SYSTEM_INSTRUCTION}\n\nВот вопросы (начиная с номера {start_number}):\n"
-    for i, q in enumerate(questions_batch, start=start_number):
+    for i, q in enumerate(questions_batch, start_number):
         prompt_text += f"{i}. {q}\n"
 
     while True:
         active_key = API_KEYS[current_key_index]
-        genai.configure(api_key=active_key)  # 🔹 ключ активируется здесь
-
+        client = genai.Client(api_key=active_key)
         try:
-            response = await genai.aio.generate_text(
+            response = await client.aio.models.generate_content(
                 model=MODEL_NAME,
-                prompt=prompt_text
+                contents=prompt_text
             )
             print("=== ОТВЕТ GEMINI (СЫРОЙ) ===")
             print(response.text)
