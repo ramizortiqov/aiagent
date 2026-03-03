@@ -19,6 +19,7 @@ google-auth==2.48.0
 google-auth-httplib2==0.3.0
 google-genai
 python-docx
+PyPDF2
 googleapis-common-protos==1.72.0
 grpcio==1.76.0
 grpcio-status==1.71.2
@@ -43,4 +44,5 @@ typing_extensions==4.15.0
 uritemplate==4.2.0
 urllib3==2.6.3
 yarl==1.9.4
+
 
