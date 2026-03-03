@@ -15,11 +15,11 @@ import PyPDF2
 from docx.oxml.ns import qn
 
 # ================= НАСТРОЙКИ =================
-TELEGRAM_TOKEN = "os.getenv(BOT_TOKEN)"
+TELEGRAM_TOKEN = os.getenv('BOT_TOKEN')
 
 # === ВСТАВЬ СЮДА ВСЕ СВОИ 8 КЛЮЧЕЙ ===
 API_KEYS = [
-     os.getenv(API_KEY)
+     os.getenv('API_KEY')
      # Ключ 2
 ]
 
