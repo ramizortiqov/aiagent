@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from aiogram.types import FSInputFile
 import re
 # === НОВАЯ БИБЛИОТЕКА GOOGLE ===
-from google.genai import genai
+from google import genai
 from docx.oxml import OxmlElement
 from docx import Document
 from docx.shared import Pt, RGBColor,Cm 
