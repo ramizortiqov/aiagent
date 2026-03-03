@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from aiogram.types import FSInputFile
 import re
 # === НОВАЯ БИБЛИОТЕКА GOOGLE ===
-from google import genai
+import google.generativeai as genai
 from docx.oxml import OxmlElement
 from docx import Document
 from docx.shared import Pt, RGBColor,Cm 
@@ -366,17 +366,19 @@ async def extract_text_from_file(file_path, file_ext):
 
 async def process_with_gemini(questions_batch, start_number):
     global current_key_index
+
     prompt_text = f"{SYSTEM_INSTRUCTION}\n\nВот вопросы (начиная с номера {start_number}):\n"
-    for i, q in enumerate(questions_batch, start_number):
+    for i, q in enumerate(questions_batch, start=start_number):
         prompt_text += f"{i}. {q}\n"
 
     while True:
         active_key = API_KEYS[current_key_index]
-        client = genai.Client(api_key=active_key)
+        genai.configure(api_key=active_key)  # 🔹 ключ активируется здесь
+
         try:
-            response = await client.aio.models.generate_content(
+            response = await genai.aio.generate_text(
                 model=MODEL_NAME,
-                contents=prompt_text
+                prompt=prompt_text
             )
             print("=== ОТВЕТ GEMINI (СЫРОЙ) ===")
             print(response.text)
